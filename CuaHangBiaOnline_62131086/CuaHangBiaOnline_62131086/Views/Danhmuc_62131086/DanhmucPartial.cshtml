@@ -1,0 +1,20 @@
+﻿@using CuaHangBiaOnline_62131086.Models;
+@model List<Hangsanxuat_62131086>
+
+
+<br />
+
+<div class="bg-success">
+
+    <h3> DANH MỤC  </h3>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-1">
+                <button class="success"><a href="#"> @item.Tenhang</a></button>
+            </div>
+        }
+    </div>
+</div>

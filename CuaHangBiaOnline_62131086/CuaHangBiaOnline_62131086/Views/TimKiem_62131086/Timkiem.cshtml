@@ -1,0 +1,98 @@
+﻿@model List<CuaHangBiaOnline_62131086.Models.Sanpham_62131086>
+@{
+    ViewBag.Title = "Kết quả tìm kiếm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-content" class="single-page">
+
+
+    @if (ViewBag.Check == 0)
+    {
+        <p class="text-center text-danger" style="font-size: 30px; margin-top:100px">@ViewBag.ThongBao</p>
+    }
+    @if (ViewBag.Check > 0)
+    {
+
+        <div class="row">
+            <div id="main-content">
+                <div class="row">
+                    <div class=" bg-danger" style="margin-top:50px; background-color:white; color:black"><h3 style="text-align:center"> THÔNG TIN TÌM KIẾM </h3></div>
+                    @foreach (var item in Model)
+                    {
+                <div class="col-md-4 col-sm-6" style="margin-top:50px">
+                    
+                    <a href="@Url.Action("xemchitiet","Sanpham_62131086", new {@Masp=item.Masp })">
+                        <img src=@Url.Content("~" +item.Anhbia.ToString()) class="img-responsive" alt="" width="400" height="400" style="object-fit:cover" />
+                    </a>
+                    <center>
+                        <h3>@item.Tensp</h3>
+                        <h3 style="color:red">Giá: @String.Format("{0:0,0}", @item.Giatien) VND</h3>
+                        <br />
+                        @using (Html.BeginForm("ThemGioHang", "GioHang_62131086", new { @iMasp = item.Masp, @strURL = Request.Url.ToString() }))
+                        {
+                            <input style=" padding: 10px 20px; background-color: orange; color: white; border: none; border-radius: 4px" type="submit" value="THÊM VÀO GIỎ HÀNG" id="bgnGioHang" onclick="alert('Đã thêm vào giỏ hàng')" />
+
+                        }
+                        
+                    </center>
+
+                </div>
+                    }
+
+                </div>
+
+                @{
+                    int PrevPage = ViewBag.Page - 1;
+                    if (PrevPage <= 0)
+                    {
+                        PrevPage = 1;
+                    }
+                    int NextPage = ViewBag.Page + 1;
+                    if (NextPage > ViewBag.NoOfPages)
+                    {
+                        NextPage = ViewBag.NoOfPages;
+                    }
+                }
+                <center>
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="/TimKiem_62131086/Timkiem?page=@PrevPage&search=@ViewBag.Search">
+                                <<
+                            </a>
+                        </li>
+                        @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                        {
+                            if (i + 1 == ViewBag.Page)
+                            {
+                                <li class="page-item active">
+                                    <a class="page-link" href="/TimKiem_62131086/Timkiem?page=@(i + 1)&search=@ViewBag.Search">
+                                        @(i + 1)
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/TimKiem_62131086/Timkiem?page=@(i + 1)&search=@ViewBag.Search">
+                                        @(i + 1)
+                                    </a>
+                                </li>
+                            }
+                        }
+                        <li class="page-item">
+                            <a class="page-link" href="/TimKiem_62131086/Timkiem?page=@NextPage&search=@ViewBag.Search">
+                                >>
+                            </a>
+                        </li>
+                    </ul>
+                </center>
+
+            </div>
+
+
+
+        </div>
+        
+     }
+</div>

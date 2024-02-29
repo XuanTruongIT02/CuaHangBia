@@ -1,0 +1,36 @@
+﻿@using CuaHangBiaOnline_62131086.Models
+@model Sanpham_62131086
+
+
+@{
+    ViewBag.Title = "xemchitiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="padding-top:100px">
+    <div style="display: flex;" class="col-md-6">
+        <img style="width: 400px; height: 400px; margin: 0 auto;" src="@Url.Content("~" +@Model.Anhbia)" />
+
+    </div>
+    <div class="col-md-6">
+        <div class="caption">
+            <div class="name"><p style="font-size: 35px; line-height: 42px;" class="text-bg-dark">@Model.Tensp</p></div>
+            <div class="info">
+                <ul>
+                    <li style="list-style-type:none;margin-left:-40px">Hãng Sản Xuất: @Model.Hangsanxuat.Tenhang</li>
+                </ul>
+            </div>
+            <div class="price text-danger">@String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:0,0}", Model.Giatien) VNĐ</div>
+            <div class="options">
+
+
+            </div>
+            @using (Html.BeginForm("ThemGioHang", "GioHang_62131086", new { @iMasp = Model.Masp, @strURL = Request.Url.ToString() }))
+            {
+                <input Style="background-color:BLACK; color: white; padding: 10px 20PX; margin-top:20px" ; type="submit" value="THÊM VÀO GIỎ HÀNG" id="bgnGioHang" onclick="alert('Đã thêm vào giỏ hàng')" />
+                @*@Url.("GioHangPartial", "GioHang_62131086");*@
+
+            }
+        </div>
+    </div>
+
+</div>

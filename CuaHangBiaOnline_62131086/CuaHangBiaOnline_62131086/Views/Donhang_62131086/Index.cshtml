@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CuaHangBiaOnline_62131086.Models.Donhang_62131086>
+
+@{ ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h2>DANH SÁCH ĐƠN ĐẶT HÀNG</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            HỌ TÊN
+        </th>
+        <th>
+            NGÀY ĐẶT
+        </th>
+        <th>
+            TÌNH TRẠNG ĐƠN HÀNG
+        </th>
+        <th>
+            THANH TOÁN
+        </th>
+        <th>
+            ĐỊA CHỈ NHẬN HÀNG
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nguoidung.Hoten)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Ngaydat)
+    </td>
+    <td>
+        @{ if (@item.Tinhtrang == 0)
+            {
+                <h5 style="color:red">ĐANG CHỜ XÁC NHẬN </h5> 
+            }
+                else if (@item.Tinhtrang == 1)
+                {
+                    <h5 style="color:goldenrod">ĐÃ XÁC NHẬN</h5> 
+                }
+                else
+                {
+            <h5 style="color:red">ĐANG CHỜ XÁC NHẬN </h5> 
+                } 
+         }
+    </td>
+    <td>
+        @{ if (@item.Thanhtoan == 1)
+            {
+                <div style="color:red">THANH TOÁN TIỀN MẶT</div> 
+                }
+            else if (@item.Thanhtoan == 2)
+            {
+                <div style="color:brown">THANH TOÁN ONLINE</div> }
+            }
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Diachinhanhang)
+    </td>
+    <td>
+        <button class="btn-primary">
+            @Html.ActionLink("CHI TIẾT", "Details", new { id = item.Madon }, new { @style = "color:white;" })
+        </button>
+
+    </td>
+</tr>}
+
+</table>

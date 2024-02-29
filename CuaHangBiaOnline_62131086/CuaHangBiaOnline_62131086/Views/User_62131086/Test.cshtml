@@ -1,0 +1,23 @@
+﻿@model CuaHangBiaOnline_62131086.Models.Nguoidung_62131086
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var u = Session["use"] as CuaHangBiaOnline_62131086.Models.Nguoidung_62131086;
+}
+
+@{
+    if (u != null)
+    {
+
+        <h2>Xin chào : @u.Email</h2>
+        @Html.ActionLink("Đăng xuất", "DangXuat", "User")
+    }
+
+    <div> Cường IT</div>
+
+}
+
+
+
+
+
